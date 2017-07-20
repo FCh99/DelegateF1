@@ -8,18 +8,32 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
+protocol HomeBuilder {
+    func buildingYourHome()
 }
+
+struct Engineer: HomeBuilder {
+    func buildingYourHome() {
+        print("I am building your home just now")
+    }
+}
+
+struct Client {
+    var delegate:HomeBuilder
+    
+}
+
+class ViewController: UIViewController {
+    
+     override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let engineerCarlos = Engineer()
+        let clientFausto = Client(delegate: engineerCarlos)
+        
+        clientFausto.delegate.buildingYourHome()
+        
+    }
+
+   }
 
